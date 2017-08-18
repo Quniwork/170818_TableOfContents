@@ -1,0 +1,186 @@
+// LANG
+@if $lang-kind==Flag {
+    .lang-wrap {
+        a {
+            height: 44px;
+            display: block;
+            padding-left: 46px;
+            color: #fff;
+            line-height: 44px;
+            background: image-url('not-use/icon-flag25.png') no-repeat;
+            @for $i from 1 through 3 {
+                &.flag0#{$i} {
+                    background-position: 15px 54px-40px*$i;
+                }
+            }
+        }
+    }
+}
+
+@else {}
+
+// FIRST GAME
+@if $first-game-format==pnglang {
+    .first-game {
+        a {
+            float: left;
+            width: image-width($lang+'game01.png');
+            height: image-height($lang+'game01.png');
+        }
+    }
+    @each $var in $first-game {
+        .first-#{$var} {
+            background: image-url($lang+'#{$var}.png') no-repeat;
+            &:hover {
+                background: image-url($lang+'#{$var}_over.png') no-repeat;
+            }
+        }
+    }
+} @else if $first-game-format==jpglang {
+    .first-game {
+        a {
+            float: left;
+        }
+    }
+    @each $var in $first-game {
+        .first-#{$var} {
+            background: image-url($lang+'#{$var}.jpg') no-repeat;
+            width: image-width($lang+'#{$var}.jpg');
+            height: image-height($lang+'#{$var}.jpg');
+            &:hover {
+                background: image-url($lang+'#{$var}_over.jpg') no-repeat;
+            }
+        }
+    }
+} @else if $first-game-format==png {
+    .first-game {
+        a {
+            float: left;
+            width: image-width('game01.png');
+            height: image-height('game01.png');
+        }
+    }
+    @each $var in $first-game {
+        .first-#{$var} {
+            background: image-url('#{$var}.png') no-repeat;
+            &:hover {
+                background: image-url('#{$var}_over.png') no-repeat;
+            }
+        }
+    }
+} @else if $first-game-format==jpg {
+    .first-game {
+        a {
+            float: left;
+            width: image-width('game01.jpg');
+            height: image-height('game01.jpg');
+        }
+    }
+    @each $var in $first-game {
+        .first-#{$var} {
+            background: image-url('#{$var}.jpg') no-repeat;
+            &:hover {
+                background: image-url('#{$var}_over.jpg') no-repeat;
+            }
+        }
+    }
+} @else {}
+
+// fIRST SLIDESHOW
+@if $first-slider==true {
+    .ele-slideshow-wrap {
+        position: relative;
+        ul {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: $first-height;
+            li {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: $first-height;
+                -webkit-backface-visibility: hidden;
+                a {
+                    display: block;
+                    img {
+                        display: block;
+                        max-width: 100%;
+                        height: auto;
+                        float: left;
+                    }
+                    .img {
+                        width: 100%;
+                        height: $first-height;
+                        background-position: top center;
+                        background-repeat: no-repeat;
+                    }
+                }
+            }
+        }
+    }
+    .ele-slideshow-scroll {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        height: $first-height;
+        overflow: hidden;
+        margin: 0 auto;
+    }
+    .ele-slideshow-control-wrap {
+        position: absolute;
+        z-index: 1;
+        bottom: 10px;
+    }
+} else {}
+
+@mixin meminfo(
+    $mem-color: #000,       // 1 文字顏色
+    $mem-bg: #fafafa,       // 2 背景顏色
+    $mem-tool-bg: #f4f4f4,  // 3 餘額轉換背景顏色
+    $mem-tool-color: #fff,  // 4 餘額轉換按鈕文字顏色
+    $mem-tool-btn-bg: #555, // 5 餘額轉換按鈕背景顏色
+    $mem-line-color: false
+) {
+.meminfo-wrap, .ele-acc-name, .ele-acc-unit, .ele-accinfo, .ele-obalance-wrap, .ele-other-balance {
+    display: inline-block;
+}
+.ele-obalance-item-wrap {
+    display: none;
+    position: absolute;
+    z-index: 1000;
+    width: 270px;
+
+    color: $mem-color;
+    background: $mem-bg;
+
+    @content;
+    .ele-obalance-item {
+        padding: 10px;
+        .ele-obalance {
+            line-height: 16px;
+            padding-bottom: 4px;
+        }
+    }
+    .ele-balance-tool {
+        text-align: right;
+        padding: 4px;
+
+        background-color: $mem-tool-bg;
+        border-top: 1px solid $mem-line-color;
+        > a {
+            display: inline-block;
+            transition: background-color .20s linear;
+            padding: 4px 8px;
+
+            color: $mem-tool-color;
+            background-color: $mem-tool-btn-bg;
+            &:hover {
+                background-color: darken($mem-tool-btn-bg, 5%);
+            }
+        }
+    }
+}
+}
